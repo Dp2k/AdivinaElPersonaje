@@ -23,4 +23,12 @@
         tools:layout_editor_absoluteX="180dp"
         tools:layout_editor_absoluteY="162dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proyecto ISC 7"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="308dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
