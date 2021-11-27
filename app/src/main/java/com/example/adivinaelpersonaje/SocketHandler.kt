@@ -1,8 +1,10 @@
 package com.example.adivinaelpersonaje
 
+
 import io.socket.client.IO
 import io.socket.client.Socket
 import java.net.URISyntaxException
+
 
 object SocketHandler {
     lateinit var  mSocket: Socket
@@ -17,7 +19,7 @@ object SocketHandler {
     }
 
     @Synchronized
-    fun getSocket():Socket{
+    fun getSocket(): Socket {
         return  mSocket
     }
 
