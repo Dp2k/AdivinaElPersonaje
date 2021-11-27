@@ -9,7 +9,7 @@
     tools:context=".Fragments.InicioFragment">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/Game1vs1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
@@ -69,7 +69,7 @@
         android:text="GuessWho  ???"
         android:textColor="#00BCD4"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/Game1vs1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
