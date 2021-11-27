@@ -22,6 +22,4 @@ object SocketHandler {
     fun getSocket(): Socket {
         return  mSocket
     }
-
-
 }
