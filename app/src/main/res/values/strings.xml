@@ -2,4 +2,7 @@
     <string name="app_name">AdivinaElPersonaje</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Playername">PlayerName</string>
+    <string name="Join">Join</string>
+    <string name="Choose_a_name_to_play">Choose a Name to play</string>
 </resources>

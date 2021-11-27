@@ -1,12 +1,11 @@
 package com.example.adivinaelpersonaje
 
-import android.widget.Button
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-class Login {
-    lateinit var PlayerName : EditText
-    lateinit var Submit : Button
-
-
-
+class Login : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+    }
 }
