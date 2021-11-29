@@ -14,26 +14,25 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var playerName:EditText
     private lateinit var layoutLogin:LinearLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
 
         btnSubmit = findViewById(R.id.btnSubmit)
         playerName = findViewById(R.id.PlayerName)
         layoutLogin = findViewById(R.id.Login)
 
         var estatusLogin : Boolean = false
-
-        val mSocket = SocketHandler.getSocket()
         SocketHandler.setSocket()
+        val mSocket = SocketHandler.getSocket()
+
 
         btnSubmit.setOnClickListener{
             mSocket.connect()
             val data = JSONObject()
             data.put("nombre",playerName.text)
             mSocket.emit("login",data)
-
         }
 
 
