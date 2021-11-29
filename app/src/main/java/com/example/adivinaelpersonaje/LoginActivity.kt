@@ -2,6 +2,7 @@ package com.example.adivinaelpersonaje
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Layout
 import android.view.View
 import android.widget.*
 import org.json.JSONArray
@@ -10,9 +11,14 @@ import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     //Declaración de los elementos de activity_login.xml
-    private lateinit var btnSubmit:Button
-    private lateinit var playerName:EditText
-    private lateinit var layoutLogin:LinearLayout
+    private lateinit var CurrentPlayer:String
+
+    private lateinit var btnSubmit: Button
+    private lateinit var btnlogout: Button
+    private lateinit var playerName: EditText
+    private lateinit var layoutLogin: LinearLayout
+    private lateinit var layoutRooms: LinearLayout
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +26,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btnSubmit = findViewById(R.id.btnSubmit)
+        btnlogout = findViewById(R.id.Logout)
         playerName = findViewById(R.id.PlayerName)
         layoutLogin = findViewById(R.id.Login)
+        layoutRooms = findViewById(R.id.Rooms)
+        layoutRooms.visibility= View.GONE
+
 
         var estatusLogin : Boolean = false
         SocketHandler.setSocket()
@@ -33,8 +43,14 @@ class LoginActivity : AppCompatActivity() {
             val data = JSONObject()
             data.put("nombre",playerName.text)
             mSocket.emit("login",data)
+            CurrentPlayer = playerName.text.toString()
         }
 
+        btnlogout.setOnClickListener{
+            val data = JSONObject()
+            data.put("Jugador",CurrentPlayer)
+            mSocket.emit("Logout",data)
+        }
 
         mSocket.on("loginStatus"){
             args ->
@@ -53,6 +69,12 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        mSocket.on("Logout"){
+            layoutLogin.visibility = View.VISIBLE
+            layoutRooms.visibility = View.GONE
+            CurrentPlayer = ""
         }
 
     }
