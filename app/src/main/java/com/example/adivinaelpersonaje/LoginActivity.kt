@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
 
         btnlogout.setOnClickListener{
             val data = JSONObject()
-            data.put("Jugador",CurrentPlayer)
-            mSocket.emit("Logout",data)
+            data.put("nombre",CurrentPlayer)
+            mSocket.emit("logout",data)
         }
 
         mSocket.on("loginStatus"){
@@ -64,8 +64,10 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText( this, msg, Toast.LENGTH_SHORT).show();
                     if (!estatusLogin){
                         layoutLogin.visibility= View.VISIBLE
+                        layoutRooms.visibility= View.GONE
                     }else{
                         layoutLogin.visibility= View.GONE
+                        layoutRooms.visibility= View.VISIBLE
                     }
                 }
             }
