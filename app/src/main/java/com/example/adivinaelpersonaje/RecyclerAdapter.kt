@@ -8,17 +8,36 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+
+    private val lista_nombre1: MutableList<String> = ArrayList()
+    private val lista_nombre2: MutableList<String> = ArrayList()
+    private val lista_resultados: MutableList<String> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_result, parent, false)
+        getInfo()
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.itemPlayer1.text = lista_nombre1[position]
+        holder.itemPlayer2.text = lista_nombre2[position]
+        holder.itemOutcometxt.text = lista_resultados[position]
+        holder.itemUsrImg1.setImageResource(R.drawable.usr_blue)
+        holder.itemUsrImg2.setImageResource(R.drawable.usr_red)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return lista_resultados.size
+    }
+
+    fun getInfo(){
+/*
+       for(i in database){
+           lista_nombre1.add(database[i].nombre1)
+           lista_nombre2.add(database[i].nombre2)
+           lista_resultados.add(database[i].resultado)
+       }
+*/
     }
 
 
