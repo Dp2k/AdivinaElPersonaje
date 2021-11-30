@@ -3,81 +3,84 @@ package com.example.adivinaelpersonaje
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import android.view.View
 import android.widget.*
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     //Declaración de los elementos de activity_login.xml
-    private lateinit var CurrentPlayer:String
+    private  var CurrentPlayerID: Int = -1
 
-    private lateinit var btnSubmit: Button
-    private lateinit var btnlogout: Button
     private lateinit var playerName: EditText
-    private lateinit var layoutLogin: LinearLayout
-    private lateinit var layoutRooms: LinearLayout
-
+    private lateinit var playerPassword: EditText
+    private lateinit var btnSubmit: Button
+    private lateinit var loginLayout: LinearLayout
+    private lateinit var roomsLayout: LinearLayout
+    private lateinit var onlinePlayer: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        btnSubmit = findViewById(R.id.btnSubmit)
-        btnlogout = findViewById(R.id.Logout)
         playerName = findViewById(R.id.PlayerName)
-        layoutLogin = findViewById(R.id.Login)
-        layoutRooms = findViewById(R.id.Rooms)
-        layoutRooms.visibility= View.GONE
+        playerPassword = findViewById(R.id.contraseñaJugador)
+        btnSubmit = findViewById(R.id.btnSubmit)
+        loginLayout = findViewById(R.id.Login)
+        roomsLayout = findViewById(R.id.Rooms)
+        onlinePlayer = findViewById(R.id.onlinePlayer)
+
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://guesswho.danielpacheco.com.mx:3000"
+        var jsonObjectRequest : JsonObjectRequest
 
 
-        var estatusLogin : Boolean = false
-        SocketHandler.setSocket()
-        val mSocket = SocketHandler.getSocket()
+        val jsonObject2 =JSONObject();
+        jsonObject2.put("id_jugador","5")
+        jsonObjectRequest = JsonObjectRequest(Request.Method.GET,url+"/getPlayerInfo/",jsonObject2,
+            {  response ->
+                onlinePlayer.text = response.get("nombre").toString()
+                println(response)
+            }, { error ->
+                error.printStackTrace()
+            }
+        )
+        queue.add(jsonObjectRequest)
+
 
 
         btnSubmit.setOnClickListener{
-            mSocket.connect()
-            val data = JSONObject()
-            data.put("nombre",playerName.text)
-            mSocket.emit("login",data)
-            CurrentPlayer = playerName.text.toString()
-        }
+            val jsonObject =JSONObject();
+            jsonObject.put("jugador",playerName.text)
+            jsonObject.put("contraseña",playerPassword.text)
+            jsonObjectRequest = JsonObjectRequest(url+"/login/",jsonObject,
+                {  response ->
+                    println(response)
+                    Toast.makeText( this,response.get("msg").toString(), Toast.LENGTH_SHORT).show();
+                    if(response.get("msg").toString() == "El jugador a entrado"){
+                        CurrentPlayerID = Integer.parseInt(response.get("idPlayer").toString())
+                        roomsLayout.visibility = View.VISIBLE
+                        loginLayout.visibility = View.GONE
 
-        btnlogout.setOnClickListener{
-            val data = JSONObject()
-            data.put("nombre",CurrentPlayer)
-            mSocket.emit("logout",data)
-        }
-
-        mSocket.on("loginStatus"){
-            args ->
-            if(args[0] != null){
-                val json_Array = JSONArray(args)
-                val jsonObject = json_Array.getJSONObject(0)
-                val msg : String = jsonObject.getString("mensaje")
-                val estatus: Boolean = jsonObject.getBoolean("estatus")
-                estatusLogin = estatus
-                runOnUiThread {
-                    Toast.makeText( this, msg, Toast.LENGTH_SHORT).show();
-                    if (!estatusLogin){
-                        layoutLogin.visibility= View.VISIBLE
-                        layoutRooms.visibility= View.GONE
-                    }else{
-                        layoutLogin.visibility= View.GONE
-                        layoutRooms.visibility= View.VISIBLE
                     }
+                }, { error ->
+                    error.printStackTrace()
                 }
-            }
+            )
+            queue.add(jsonObjectRequest)
         }
 
-        mSocket.on("Logout"){
-            layoutLogin.visibility = View.VISIBLE
-            layoutRooms.visibility = View.GONE
-            CurrentPlayer = ""
-        }
+
+
 
     }
 

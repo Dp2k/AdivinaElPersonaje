@@ -5,4 +5,5 @@
     <string name="Playername">PlayerName</string>
     <string name="Join">Join</string>
     <string name="Choose_a_name_to_play">Choose a Name to play</string>
+    <string name="PlayerPassword">PlayerPassword</string>
 </resources>

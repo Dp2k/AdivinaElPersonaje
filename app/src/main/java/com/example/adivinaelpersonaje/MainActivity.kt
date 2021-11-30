@@ -8,6 +8,8 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
     private lateinit var btnjugar:Button
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_inicio)
