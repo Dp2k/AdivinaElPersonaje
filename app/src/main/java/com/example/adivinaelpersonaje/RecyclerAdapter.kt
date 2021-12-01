@@ -1,11 +1,16 @@
 package com.example.adivinaelpersonaje
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -14,9 +19,26 @@ class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     private val lista_resultados: MutableList<String> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_result, parent, false)
+/*
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://guesswho.danielpacheco.com.mx:3000"
+        var jsonObjectRequest : JsonObjectRequest
+
+
+
+        jsonObjectRequest = JsonObjectRequest( Request.Method.GET,url+"/getAllPartidas/",null,
+            {  response ->
+                println(response)
+            }, { error ->
+               error.printStackTrace()
+            }
+        )
+        queue.add(jsonObjectRequest)*/
+
         getInfo()
         return ViewHolder(v)
     }
+
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         holder.itemPlayer1.text = lista_nombre1[position]

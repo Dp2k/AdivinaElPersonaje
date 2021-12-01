@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         val url = "http://guesswho.danielpacheco.com.mx:3000"
         var jsonObjectRequest : JsonObjectRequest
 
-
+        /*
         val jsonObject2 =JSONObject();
         jsonObject2.put("id_jugador","5")
         jsonObjectRequest = JsonObjectRequest(Request.Method.GET,url+"/getPlayerInfo/",jsonObject2,
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             }
         )
         queue.add(jsonObjectRequest)
-
+*/
 
 
         btnSubmit.setOnClickListener{
