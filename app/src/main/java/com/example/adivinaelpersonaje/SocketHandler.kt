@@ -7,7 +7,7 @@ import java.net.URISyntaxException
 
 object SocketHandler {
     lateinit var  mSocket: Socket
-
+//Holamamada
     @Synchronized
     fun setSocket(){
         try{
