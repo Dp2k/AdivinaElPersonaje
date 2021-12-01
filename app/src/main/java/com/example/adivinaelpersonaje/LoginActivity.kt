@@ -23,10 +23,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var playerName: EditText
     private lateinit var playerPassword: EditText
     private lateinit var btnSubmit: Button
+    private lateinit var btnLogout: Button
     private lateinit var loginLayout: LinearLayout
     private lateinit var roomsLayout: LinearLayout
     private lateinit var onlinePlayer: TextView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,27 +35,47 @@ class LoginActivity : AppCompatActivity() {
         playerName = findViewById(R.id.PlayerName)
         playerPassword = findViewById(R.id.contraseñaJugador)
         btnSubmit = findViewById(R.id.btnSubmit)
+        btnLogout = findViewById(R.id.Logout)
         loginLayout = findViewById(R.id.Login)
         roomsLayout = findViewById(R.id.Rooms)
         onlinePlayer = findViewById(R.id.onlinePlayer)
 
-        val queue = Volley.newRequestQueue(this)
+       // val queue = Volley.newRequestQueue(this)
         val url = "http://guesswho.danielpacheco.com.mx:3000"
         var jsonObjectRequest : JsonObjectRequest
 
-        /*
-        val jsonObject2 =JSONObject();
-        jsonObject2.put("id_jugador","5")
-        jsonObjectRequest = JsonObjectRequest(Request.Method.GET,url+"/getPlayerInfo/",jsonObject2,
-            {  response ->
-                onlinePlayer.text = response.get("nombre").toString()
-                println(response)
-            }, { error ->
-                error.printStackTrace()
+        SocketHandler.setSocket()
+        val mSocket = SocketHandler.getSocket()
+
+
+        btnLogout.setOnClickListener{
+
+            val jsonObject =JSONObject();
+            jsonObject.put("id_jugador",CurrentPlayerID)
+            jsonObjectRequest = JsonObjectRequest(url+"/logout/",jsonObject,
+                {  response ->
+                    //println(response)
+                    Toast.makeText( this,response.get("msg").toString(), Toast.LENGTH_SHORT).show();
+                }, { error ->
+                    error.printStackTrace()
+                }
+            )
+            VolleySingleton.getInstance(applicationContext)
+                .addToRequestQueue(jsonObjectRequest)
+            CurrentPlayerID = -1
+            playerName.setText("")
+            playerPassword.setText("")
+            loginActivo()
+        }
+        mSocket.on("listaJugadores"){
+            args ->
+            if (args[0] != null){
+               val json_Array = JSONArray(args)
+                val jsonObject = json_Array.getJSONObject(0)
+                print(jsonObject)
+
             }
-        )
-        queue.add(jsonObjectRequest)
-*/
+        }
 
 
         btnSubmit.setOnClickListener{
@@ -64,24 +84,55 @@ class LoginActivity : AppCompatActivity() {
             jsonObject.put("contraseña",playerPassword.text)
             jsonObjectRequest = JsonObjectRequest(url+"/login/",jsonObject,
                 {  response ->
-                    println(response)
+                    //println(response)
                     Toast.makeText( this,response.get("msg").toString(), Toast.LENGTH_SHORT).show();
                     if(response.get("msg").toString() == "El jugador a entrado"){
                         CurrentPlayerID = Integer.parseInt(response.get("idPlayer").toString())
-                        roomsLayout.visibility = View.VISIBLE
-                        loginLayout.visibility = View.GONE
+                        roomsActivo()
 
+                        //Coneccion de socket
+
+                        mSocket.connect()
+                        val data = JSONObject();
+                        data.put("id_jugador",CurrentPlayerID);
+                        mSocket.emit("nuevoJugador",data)
+
+
+
+                        //Asi se hace un get
+                        jsonObjectRequest = JsonObjectRequest(Request.Method.GET,url+"/getPlayer/?id_jugador="+CurrentPlayerID.toString(),null,
+                            {  response ->
+                                //println(response)
+                                onlinePlayer.text = response.get("nombre").toString()
+                            }, { error ->
+                                error.printStackTrace()
+                            }
+                        )
+
+                        VolleySingleton.getInstance(applicationContext)
+                            .addToRequestQueue(jsonObjectRequest)
                     }
                 }, { error ->
                     error.printStackTrace()
                 }
             )
-            queue.add(jsonObjectRequest)
+            VolleySingleton.getInstance(applicationContext)
+                .addToRequestQueue(jsonObjectRequest)
+            println(jsonObjectRequest)
+
         }
 
+    }
 
+    fun loginActivo(){
 
+        roomsLayout.visibility = View.GONE
+        loginLayout.visibility = View.VISIBLE
+    }
 
+    fun roomsActivo(){
+        roomsLayout.visibility = View.VISIBLE
+        loginLayout.visibility = View.GONE
     }
 
 }
