@@ -4,8 +4,8 @@ import java.util.*
 
 data class Partida(
     val id_partida: Int,
-    val id_jugadorW: Int,
-    val id_jugadorL: Int,
-    val puntaje: Int,
-    val fecha: String
+    val JugadorW: String,
+    val JugadorL: String,
+    val Score: Int,
+    val Fecha: String
 )

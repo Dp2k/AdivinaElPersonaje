@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdivinaElPersonaje"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RecyclerActivity"
+        <activity android:name=".HistoriaActivity"
             android:exported="false"/>
         <activity
             android:name=".LoginActivity"
