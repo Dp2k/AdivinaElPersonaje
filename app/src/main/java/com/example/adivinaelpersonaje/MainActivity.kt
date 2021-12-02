@@ -24,10 +24,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnHistorial.setOnClickListener{
-            val intent = Intent(this, HistoriaActivity::class.java)
+            val intent = Intent(this, HistorialActivity::class.java)
             startActivity(intent)
             finish()
-
         }
     }
 }
