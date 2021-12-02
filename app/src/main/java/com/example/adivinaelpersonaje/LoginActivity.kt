@@ -6,6 +6,7 @@ import android.text.Layout
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -19,7 +20,7 @@ import kotlin.math.log
 class LoginActivity : AppCompatActivity() {
     //Declaración de los elementos de activity_login.xml
     private  var CurrentPlayerID: Int = -1
-
+    var Jugadores = listOf<Jugador>()
     private lateinit var playerName: EditText
     private lateinit var playerPassword: EditText
     private lateinit var btnSubmit: Button
@@ -27,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginLayout: LinearLayout
     private lateinit var roomsLayout: LinearLayout
     private lateinit var onlinePlayer: TextView
+
+    private lateinit var recycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +46,10 @@ class LoginActivity : AppCompatActivity() {
        // val queue = Volley.newRequestQueue(this)
         val url = "http://guesswho.danielpacheco.com.mx:3000"
         var jsonObjectRequest : JsonObjectRequest
-
+        recycler = findViewById(R.id.recyclerView2)
         SocketHandler.setSocket()
         val mSocket = SocketHandler.getSocket()
-
+        recycler.adapter = JugadorAdapter(Jugadores)
 
         btnLogout.setOnClickListener{
 
@@ -67,13 +70,20 @@ class LoginActivity : AppCompatActivity() {
             playerPassword.setText("")
             loginActivo()
         }
+
         mSocket.on("listaJugadores"){
             args ->
             if (args[0] != null){
-               val json_Array = JSONArray(args)
-                val jsonObject = json_Array.getJSONObject(0)
-                print(jsonObject)
-
+                runOnUiThread {  val jArr = JSONArray( args[0].toString())
+                    for (i in 0 until jArr.length()) {
+                        val jo = jArr.getJSONObject(i)
+                        Jugadores = listOf<Jugador>()
+                        Jugadores += listOf<Jugador>(
+                            Jugador(jo.getInt("id_jugador"),jo.getString("nombre"),jo.getString("socketID"))
+                        )
+                    }
+                    recycler.adapter = JugadorAdapter(Jugadores)
+                }
             }
         }
 
