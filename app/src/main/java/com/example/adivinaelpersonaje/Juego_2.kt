@@ -1,18 +1,19 @@
 package com.example.adivinaelpersonaje
 
 import android.app.Activity
-import android.widget.ImageButton
-import android.widget.TextView
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.json.JSONObject
 import java.util.*
 
 class Juego_2 : Activity() {
     // variables para los componentes de la vista
+    var msj = arrayOfNulls<TextView>(10)
     private  var CurrentPlayerID: Int = -1
+    lateinit var env:EditText
     private var SocketO: String = ""
     var imb00: ImageButton? = null
     var imb01: ImageButton? = null
@@ -94,23 +95,46 @@ class Juego_2 : Activity() {
 
 
         println("El personaje del oponente es :"+pO)
+
+        val chat = findViewById<Button>(R.id.chat)
+        chat.setOnClickListener {
+            val bottom1 = BottomSheetDialog(
+                this@Juego_2
+            )
+            val bott = LayoutInflater.from(applicationContext)
+                .inflate(
+                    R.layout.emergente,
+                    findViewById<LinearLayout>(R.id.bottomcontainer)
+                )
+            msj[0] = bott.findViewById(R.id.msg1)
+            msj[1] = bott.findViewById(R.id.msg2)
+            msj[2] = bott.findViewById(R.id.msg3)
+            msj[3] = bott.findViewById(R.id.msg4)
+            msj[4] = bott.findViewById(R.id.msg5)
+            msj[5] = bott.findViewById(R.id.msg6)
+            msj[6] = bott.findViewById(R.id.msg7)
+            msj[7] = bott.findViewById(R.id.msg8)
+            msj[8] = bott.findViewById(R.id.msg9)
+            msj[9] = bott.findViewById(R.id.msg10)
+            bott.findViewById<View>(R.id.gchat).setOnClickListener {
+                Toast.makeText(this@Juego_2, "Cerrando chat", Toast.LENGTH_SHORT).show()
+                bottom1.dismiss()
+            }
+            bott.findViewById<View>(R.id.enviar).setOnClickListener {
+                env = bott.findViewById(R.id.enviado)
+                msj[8]?.setText(msj[6]?.text)
+                msj[6]?.setText(msj[4]?.text)
+                msj[4]?.setText(msj[2]?.text)
+                msj[2]?.setText(msj[0]?.text)
+                msj[0]?.setText(env.text)
+            }
+            bottom1.setContentView(bott)
+            bottom1.show()
+        }
         val mSocket = SocketHandler.getSocket()
         val data = JSONObject();
         data.put("socketIDO",SocketO);
-        /*
-        data.put("personajeO",p);
-        mSocket.emit("intercambiarPersonaje",data)
 
-        mSocket.on("intercambiarPersonaje"){
-            args->
-            if (args[0] != null){
-                runOnUiThread{
-                    pO = args[0].toString().toInt()
-                    println("Es el personaje del oponente"+pO)
-                }
-            }
-        }
-    */
 
     }
 

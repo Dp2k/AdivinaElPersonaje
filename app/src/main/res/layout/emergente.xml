@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="130dp">
@@ -21,11 +22,11 @@
 
                 <TextView
                     android:id="@+id/msg1"
-                    android:layout_marginTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
                     android:background="#03A9F4"
                     android:text="Mensaje1"
                     android:textColor="@color/black" />
@@ -43,8 +44,8 @@
                     android:id="@+id/msg3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="15dp"
                     android:background="#03A9F4"
                     android:text="Mensaje3"
                     android:textColor="@color/black" />
@@ -62,8 +63,8 @@
                     android:id="@+id/msg5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="15dp"
                     android:background="#03A9F4"
                     android:text="Mensaje5"
                     android:textColor="@color/black" />
@@ -81,8 +82,8 @@
                     android:id="@+id/msg7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="15dp"
                     android:background="#03A9F4"
                     android:text="Mensaje7"
                     android:textColor="@color/black" />
@@ -100,8 +101,8 @@
                     android:id="@+id/msg9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
                     android:layout_gravity="right"
+                    android:layout_marginRight="15dp"
                     android:background="#03A9F4"
                     android:text="Mensaje9"
                     android:textColor="@color/black" />
