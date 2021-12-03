@@ -76,6 +76,15 @@ class LoginActivity : AppCompatActivity() {
             loginActivo()
         }
 
+        mSocket.on("msg privado"){
+            args ->
+            if(args[0] != null){
+                runOnUiThread {
+                    Toast.makeText( this,args[0].toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
         mSocket.on("listaJugadores"){
             args ->
             if (args[0] != null){
@@ -94,6 +103,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+
 
 
         btnSubmit.setOnClickListener{

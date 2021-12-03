@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONObject
 
 class JugadorAdapter(private val dataSet: List<Jugador>) :
     RecyclerView.Adapter<JugadorAdapter.ViewHolder>() {
@@ -31,9 +32,18 @@ class JugadorAdapter(private val dataSet: List<Jugador>) :
     class  ViewHolder(view : View): RecyclerView.ViewHolder(view){
 
         private var txtJugador = view.findViewById<TextView>(R.id.nombreJugador)
+        private var btnmsg = view.findViewById<TextView>(R.id.btn_msg)
 
         fun bind(jugador : Jugador) {
             txtJugador.text = jugador.nombreJugador
+            btnmsg.setOnClickListener{
+                SocketHandler.setSocket()
+                val mSocket = SocketHandler.getSocket()
+                val data = JSONObject()
+                data.put("destinoSocketID",jugador.SocketID);
+                data.put("msg","Hola hermosa")
+                mSocket.emit("msg privado",data)
+            }
         }
 
 
