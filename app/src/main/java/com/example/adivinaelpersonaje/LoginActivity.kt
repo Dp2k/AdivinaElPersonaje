@@ -90,7 +90,8 @@ class LoginActivity : AppCompatActivity() {
                     builder.setPositiveButton(android.R.string.ok) {
                             dialog, which ->
                         val data = JSONObject();
-                        data.put("id_jugador",CurrentPlayerID);
+                        println("El Socket que queremos"+args[0].toString())
+                        data.put("socketID",args[0].toString());
                             mSocket.emit("invAceptada",data)
                         Toast.makeText(this,
                             "jalas",
@@ -106,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
         mSocket.on("invAceptada"){
                 args ->
                 if(args[0] != null){
+                    println("Entramos")
                     runOnUiThread {
                         val builder = AlertDialog.Builder(this)
                         builder.setTitle("Confirmacion")
