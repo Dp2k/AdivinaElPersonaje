@@ -5,10 +5,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import org.json.JSONObject
 import java.util.*
 
 class Juego_1 : Activity() {
     // variables para los componentes de la vista
+    private  var CurrentPlayerID: Int = -1
+    private var SocketO: String = ""
     var imb00: ImageButton? = null
     var imb01: ImageButton? = null
     var imb02: ImageButton? = null
@@ -77,7 +80,15 @@ class Juego_1 : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.juego)
+        CurrentPlayerID = intent.getStringExtra("currentid").toString().toInt()
+        SocketO = intent.getStringExtra("socket_o").toString()
         init()
+        val mSocket = SocketHandler.getSocket()
+        val data = JSONObject();
+        data.put("id_jugador",CurrentPlayerID)
+        mSocket.emit("logout",data)
+
+
         val chat = findViewById<Button>(R.id.CHAT)
         chat.setOnClickListener {
             val bottom1 = BottomSheetDialog(
