@@ -65,6 +65,10 @@ class LoginActivity : AppCompatActivity() {
             )
             VolleySingleton.getInstance(applicationContext)
                 .addToRequestQueue(jsonObjectRequest)
+            val data = JSONObject();
+            data.put("id_jugador",CurrentPlayerID);
+            mSocket.emit("logout",data)
+            //mSocket.disconnect();
             CurrentPlayerID = -1
             playerName.setText("")
             playerPassword.setText("")
@@ -74,10 +78,13 @@ class LoginActivity : AppCompatActivity() {
         mSocket.on("listaJugadores"){
             args ->
             if (args[0] != null){
-                runOnUiThread {  val jArr = JSONArray( args[0].toString())
+                runOnUiThread {
+                    val jArr = JSONArray( args[0].toString())
+                    println(jArr)
+                    Jugadores = listOf<Jugador>()
                     for (i in 0 until jArr.length()) {
                         val jo = jArr.getJSONObject(i)
-                        Jugadores = listOf<Jugador>()
+                        
                         Jugadores += listOf<Jugador>(
                             Jugador(jo.getInt("id_jugador"),jo.getString("nombre"),jo.getString("socketID"))
                         )
