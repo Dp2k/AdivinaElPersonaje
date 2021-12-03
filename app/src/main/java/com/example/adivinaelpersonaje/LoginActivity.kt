@@ -1,5 +1,6 @@
 package com.example.adivinaelpersonaje
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
@@ -50,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         recycler = findViewById(R.id.recyclerView2)
         SocketHandler.setSocket()
         val mSocket = SocketHandler.getSocket()
-        recycler.adapter = JugadorAdapter(Jugadores)
+        recycler.adapter = JugadorAdapter(Jugadores, CurrentPlayerID)
 
         btnLogout.setOnClickListener{
 
@@ -115,13 +116,10 @@ class LoginActivity : AppCompatActivity() {
                             Jugador(jo.getInt("id_jugador"),jo.getString("nombre"),jo.getString("socketID"))
                         )
                     }
-                    recycler.adapter = JugadorAdapter(Jugadores)
+                    recycler.adapter = JugadorAdapter(Jugadores, CurrentPlayerID)
                 }
             }
         }
-
-
-
 
         btnSubmit.setOnClickListener{
             val jsonObject =JSONObject();
@@ -173,6 +171,12 @@ class LoginActivity : AppCompatActivity() {
 
         roomsLayout.visibility = View.GONE
         loginLayout.visibility = View.VISIBLE
+    }
+    fun jugar(){
+        val i = Intent(this, Juego_1::class.java)
+        //i.putExtra("personaje", p)
+        startActivity(i)
+        finish()
     }
 
     fun roomsActivo(){

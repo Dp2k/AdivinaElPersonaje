@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomcontainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#D9F6DA"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/msg1"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    android:background="#03A9F4"
+                    android:text="Mensaje1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#FF9800"
+                    android:text="Mensaje2"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    android:background="#03A9F4"
+                    android:text="Mensaje3"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#FF9800"
+                    android:text="Mensaje4"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    android:background="#03A9F4"
+                    android:text="Mensaje5"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#FF9800"
+                    android:text="Mensaje6"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    android:background="#03A9F4"
+                    android:text="Mensaje7"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#FF9800"
+                    android:text="Mensaje8"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="right"
+                    android:background="#03A9F4"
+                    android:text="Mensaje9"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/msg10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="#FF9800"
+                    android:text="Mensaje10"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_marginVertical="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/enviado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="120dp"
+            android:hint="Escribe tu mensaje" />
+
+        <Button
+            android:id="@+id/enviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginRight="5dp"
+            android:text="Enviar" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/gchat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EBF490"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:text="Guardar Chat"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
+
+</LinearLayout>
