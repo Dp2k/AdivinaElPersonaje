@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginLayout: LinearLayout
     private lateinit var roomsLayout: LinearLayout
     private lateinit var onlinePlayer: TextView
+    private var SocketO: String = ""
 
     private lateinit var recycler: RecyclerView
 
@@ -92,10 +93,12 @@ class LoginActivity : AppCompatActivity() {
                         val data = JSONObject();
                         println("El Socket que queremos"+args[0].toString())
                         data.put("socketID",args[0].toString());
+                        SocketO = args[0].toString()
                             mSocket.emit("invAceptada",data)
                         Toast.makeText(this,
                             "jalas",
                             Toast.LENGTH_LONG).show()
+                        jugar()
                     }
                     builder.setNegativeButton("Cancelar", null)
                     //builder.setNeutralButton("Recordar más tarde", null)
@@ -116,9 +119,11 @@ class LoginActivity : AppCompatActivity() {
                         builder.setMessage("El jugador:"+jo.getString("nombre")+" acepto tu invitacion")
                         builder.setPositiveButton(android.R.string.ok) {
                                 dialog, which ->
+                            SocketO=args[0].toString()
                             Toast.makeText(this,
                                 "Inciando partida",
                                 Toast.LENGTH_LONG).show()
+                            jugar()
                         }
                         //builder.setNegativeButton("Cancelar", null)
                         //builder.setNeutralButton("Recordar más tarde", null)
@@ -200,7 +205,8 @@ class LoginActivity : AppCompatActivity() {
     }
     fun jugar(){
         val i = Intent(this, Juego_1::class.java)
-        //i.putExtra("personaje", p)
+        i.putExtra("currentid", CurrentPlayerID)
+        i.putExtra("socket_o", SocketO)
         startActivity(i)
         finish()
     }
