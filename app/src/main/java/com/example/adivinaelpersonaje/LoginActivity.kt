@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
             data.put("id_jugador",CurrentPlayerID);
             mSocket.emit("logout",data)
             //mSocket.disconnect();
+            //Hola
             CurrentPlayerID = -1
             playerName.setText("")
             playerPassword.setText("")
