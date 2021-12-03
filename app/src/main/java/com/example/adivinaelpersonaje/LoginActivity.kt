@@ -6,6 +6,7 @@ import android.text.Layout
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -19,7 +20,7 @@ import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     //Declaración de los elementos de activity_login.xml
-      var CurrentPlayerID: Int = -1
+    private  var CurrentPlayerID: Int = -1
     var Jugadores = listOf<Jugador>()
     private lateinit var playerName: EditText
     private lateinit var playerPassword: EditText
@@ -80,6 +81,18 @@ class LoginActivity : AppCompatActivity() {
             args ->
             if(args[0] != null){
                 runOnUiThread {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Error")
+                    builder.setMessage(args[1].toString())
+                    builder.setPositiveButton(android.R.string.ok) {
+                            dialog, which ->
+                        Toast.makeText(this,
+                            "Has aceptado",
+                            Toast.LENGTH_LONG).show()
+                    }
+                    builder.setNegativeButton("Cancelar", null)
+                    //builder.setNeutralButton("Recordar más tarde", null)
+                    builder.show()
                     Toast.makeText( this,args[1].toString(), Toast.LENGTH_SHORT).show();
                 }
             }
