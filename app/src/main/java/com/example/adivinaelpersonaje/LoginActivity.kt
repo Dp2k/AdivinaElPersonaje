@@ -82,12 +82,15 @@ class LoginActivity : AppCompatActivity() {
             if(args[0] != null){
                 runOnUiThread {
                     val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Error")
-                    builder.setMessage(args[1].toString())
+                    builder.setTitle("Invitacion")
+                    val jArray = JSONArray(args[1].toString())
+                    val jo = jArray.getJSONObject(0)
+
+                    builder.setMessage("Quieres jugar con el jugador :"+jo.getString("nombre"))
                     builder.setPositiveButton(android.R.string.ok) {
                             dialog, which ->
                         Toast.makeText(this,
-                            "Has aceptado",
+                            "jalas",
                             Toast.LENGTH_LONG).show()
                     }
                     builder.setNegativeButton("Cancelar", null)
