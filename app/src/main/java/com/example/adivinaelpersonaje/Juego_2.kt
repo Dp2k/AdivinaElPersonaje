@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import org.json.JSONObject
 import java.util.*
 
 class Juego_2 : Activity() {
@@ -74,6 +75,7 @@ class Juego_2 : Activity() {
     lateinit var imagenes: IntArray
     var fondo = 0
     var p = 0
+    var pO = 0
 
     //variables del juego
     var arrayDesordenado: ArrayList<Int?>? = null
@@ -86,6 +88,24 @@ class Juego_2 : Activity() {
         CurrentPlayerID = str.toString().toInt()
         SocketO = intent.getStringExtra("socket_o").toString()
         init()
+
+        val mSocket = SocketHandler.getSocket()
+        val data = JSONObject();
+        data.put("socketIDO",SocketO);
+        data.put("personajeO",p);
+        mSocket.emit("intercambiarPersonaje",data)
+
+        mSocket.on("intercambiarPersonaje"){
+            args->
+            if (args[0] != null){
+                runOnUiThread{
+                    println(args[0].toString())
+
+                }
+            }
+        }
+
+
     }
 
     private fun cargarTablero() {
