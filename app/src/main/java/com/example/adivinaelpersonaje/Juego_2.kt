@@ -52,30 +52,30 @@ class Juego_2 : Activity() {
     lateinit var eO: String
     var per: TextView? = null
     var nom = arrayOf(
-        "Gato",
-        "Perro",
-        "Caracol",
-        "Conejo",
-        "Aguila",
-        "Mariposa",
-        "Pez",
-        "Cotorro",
-        "Dragon",
-        "Unicornio",
-        "Fenix",
-        "Pegaso",
-        "Fauno",
-        "Minotauro",
-        "Kraken",
-        "Centauro",
-        "Tiburon",
-        "Delfin",
-        "Pez Globo",
-        "Pez Espada",
-        "Ballena",
-        "Mantarraya",
-        "Medusa",
-        "Cangrejo"
+        "Winston",
+        "Paul",
+        "Jody",
+        "Marcellus",
+        "Jimmie",
+        "Esmeralda",
+        "Captain Koons",
+        "Jules",
+        "Buddy",
+        "The Gimp",
+        "Yolanda",
+        "Roger",
+        "Fabienne",
+        "Ringo",
+        "Raquel",
+        "Lance",
+        "Butch",
+        "Mia",
+        "Marvin",
+        "Zed",
+        "Brett",
+        "Trudi",
+        "Maynard",
+        "Vincent"
     )
 
     //imagenes
@@ -133,6 +133,7 @@ class Juego_2 : Activity() {
                 bottom1.dismiss()
             }
             bott.findViewById<View>(R.id.enviar).setOnClickListener {
+                env = bott.findViewById(R.id.enviado)
                 val data = JSONObject();
                 data.put("socketIDO",SocketO);
                 data.put("mensaje",env.text.toString());
