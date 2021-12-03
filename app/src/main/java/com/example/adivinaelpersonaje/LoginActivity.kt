@@ -19,7 +19,7 @@ import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     //Declaración de los elementos de activity_login.xml
-    private  var CurrentPlayerID: Int = -1
+      var CurrentPlayerID: Int = -1
     var Jugadores = listOf<Jugador>()
     private lateinit var playerName: EditText
     private lateinit var playerPassword: EditText
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             args ->
             if(args[0] != null){
                 runOnUiThread {
-                    Toast.makeText( this,args[0].toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText( this,args[1].toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }

@@ -33,15 +33,16 @@ class JugadorAdapter(private val dataSet: List<Jugador>) :
 
         private var txtJugador = view.findViewById<TextView>(R.id.nombreJugador)
         private var btnmsg = view.findViewById<TextView>(R.id.btn_msg)
-
+        lateinit var  lg:LoginActivity
         fun bind(jugador : Jugador) {
             txtJugador.text = jugador.nombreJugador
             btnmsg.setOnClickListener{
-                SocketHandler.setSocket()
                 val mSocket = SocketHandler.getSocket()
                 val data = JSONObject()
+                println("Si entro")
+                println(jugador.SocketID)
                 data.put("destinoSocketID",jugador.SocketID);
-                data.put("msg","Hola hermosa")
+                data.put("msg",lg.CurrentPlayerID)
                 mSocket.emit("msg privado",data)
             }
         }
