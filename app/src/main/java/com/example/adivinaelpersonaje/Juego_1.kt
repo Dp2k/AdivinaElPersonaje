@@ -95,19 +95,23 @@ class Juego_1 : Activity() {
         mSocket.on("seleccionPersonaje"){
             args ->
             if (args[0] != null) {
-                runOnUiThread {
-                    //val jArray = JSONArray(args[0].toString())
-                    //val jo = jArray.getJSONObject(0)
-                    println(args[0].toString())
-                    Toast.makeText( this,args[0].toString(), Toast.LENGTH_SHORT).show();
+                runOnUiThread{
+                    Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
                 }
+                //Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
+                /*
+                runOnUiThread {
+                    val jArray = JSONArray(args.toString())
+                    val jo = jArray.getJSONObject(0)
+                    Toast.makeText( this,jo.getString("msg"), Toast.LENGTH_SHORT).show();
+                }*/
             }
         }
 
 
 
-
-        /*val chat = findViewById<Button>(R.id.CHAT)
+        /*
+        val chat = findViewById<Button>(R.id.CHAT)
         chat.setOnClickListener {
             val bottom1 = BottomSheetDialog(
                 this@Juego_1
@@ -214,8 +218,9 @@ class Juego_1 : Activity() {
             i.putExtra("personaje", p.toString())
             i.putExtra("currentid", CurrentPlayerID.toString())
             i.putExtra("socket_o", SocketO)
-            finish()
             startActivity(i)
+            finish()
+
         }
         else {
             Toast.makeText(this,

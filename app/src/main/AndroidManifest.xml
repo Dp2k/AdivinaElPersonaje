@@ -24,7 +24,7 @@
             android:exported="false"
             tools:ignore="DuplicateActivity" />
         <activity
-            android:name=".Juego_1"
+            android:name=".Juego_2"
             android:exported="false"
             tools:ignore="DuplicateActivity" />
         <activity

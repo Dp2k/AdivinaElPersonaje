@@ -218,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="10dp"
-                android:text="@string/boton_juego_reinit"></Button>
+                android:text="Voltear"></Button>
 
             <Button
                 android:id="@+id/button"
@@ -234,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="10dp"
-                android:text="@string/boton_juego_quit"></Button>
+                android:text="Voltear"></Button>
 
         </LinearLayout>
 
