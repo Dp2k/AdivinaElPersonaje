@@ -14,6 +14,7 @@ import java.util.*
 class Juego_1 : Activity() {
     // variables para los componentes de la vista
     private  var CurrentPlayerID: Int = -1
+    var pO: Int  = -1
     private var SocketO: String = ""
     var imb00: ImageButton? = null
     var imb01: ImageButton? = null
@@ -97,6 +98,7 @@ class Juego_1 : Activity() {
             if (args[0] != null) {
                 runOnUiThread{
                     Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
+                    pO = args[0].toString().toInt()
                 }
                 //Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
                 /*
@@ -108,44 +110,6 @@ class Juego_1 : Activity() {
             }
         }
 
-
-
-        /*
-        val chat = findViewById<Button>(R.id.CHAT)
-        chat.setOnClickListener {
-            val bottom1 = BottomSheetDialog(
-                this@Juego_1
-            )
-            val bott = LayoutInflater.from(applicationContext)
-                .inflate(
-                    R.layout.emergente,
-                    findViewById<LinearLayout>(R.id.bottomcontainer)
-                )
-            msj[0] = bott.findViewById(R.id.msg1)
-            msj[1] = bott.findViewById(R.id.msg2)
-            msj[2] = bott.findViewById(R.id.msg3)
-            msj[3] = bott.findViewById(R.id.msg4)
-            msj[4] = bott.findViewById(R.id.msg5)
-            msj[5] = bott.findViewById(R.id.msg6)
-            msj[6] = bott.findViewById(R.id.msg7)
-            msj[7] = bott.findViewById(R.id.msg8)
-            msj[8] = bott.findViewById(R.id.msg9)
-            msj[9] = bott.findViewById(R.id.msg10)
-            bott.findViewById<View>(R.id.gchat).setOnClickListener {
-                Toast.makeText(this@Juego_1, "Cerrando chat", Toast.LENGTH_SHORT).show()
-                bottom1.dismiss()
-            }
-            bott.findViewById<View>(R.id.enviar).setOnClickListener {
-                env = bott.findViewById(R.id.enviado)
-                msj[8]?.setText(msj[6]?.text)
-                msj[6]?.setText(msj[4]?.text)
-                msj[4]?.setText(msj[2]?.text)
-                msj[2]?.setText(msj[0]?.text)
-                msj[0]?.setText(env.text)
-            }
-            bottom1.setContentView(bott)
-            bottom1.show()
-        }*/
     }
 
     private fun cargarTablero() {
@@ -209,18 +173,21 @@ class Juego_1 : Activity() {
     }
 
     private fun reset() {
-        if(p != "Nada") {
+        if(p != "Nada" ) {
             val mSocket = SocketHandler.getSocket()
             val data = JSONObject();
             data.put("socketIDO", SocketO)
+            data.put("personajeO",p)
             mSocket.emit("seleccionPersonaje", data)
-            val i = Intent(this, Juego_2::class.java)
-            i.putExtra("personaje", p.toString())
-            i.putExtra("currentid", CurrentPlayerID.toString())
-            i.putExtra("socket_o", SocketO)
-            startActivity(i)
-            finish()
-
+            if(pO != -1){
+                val i = Intent(this, Juego_2::class.java)
+                i.putExtra("personaje", p.toString())
+                i.putExtra("personajeO", pO.toString())
+                i.putExtra("currentid", CurrentPlayerID.toString())
+                i.putExtra("socket_o", SocketO)
+                startActivity(i)
+                finish()
+            }
         }
         else {
             Toast.makeText(this,
