@@ -92,6 +92,7 @@ class Juego_2 : Activity() {
         val mSocket = SocketHandler.getSocket()
         val data = JSONObject();
         data.put("socketIDO",SocketO);
+        println(SocketO)
         data.put("personajeO",p);
         mSocket.emit("intercambiarPersonaje",data)
 
@@ -99,8 +100,8 @@ class Juego_2 : Activity() {
             args->
             if (args[0] != null){
                 runOnUiThread{
-                    println(args[0].toString())
-
+                    pO = args[0].toString().toInt()
+                    println("Es el personaje del oponente"+pO)
                 }
             }
         }
