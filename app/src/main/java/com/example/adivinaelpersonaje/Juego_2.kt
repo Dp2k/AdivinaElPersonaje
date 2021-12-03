@@ -19,6 +19,8 @@ class Juego_2 : Activity() {
     lateinit var env:EditText
     private var SocketO: String = ""
     var Mensajes = listOf<Mensaje>(
+        Mensaje("Ulises","TU jugador es negro?"),
+        Mensaje("Israel","Si")
     )
     var imb00: ImageButton? = null
     var imb01: ImageButton? = null
