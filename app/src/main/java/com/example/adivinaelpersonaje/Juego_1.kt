@@ -99,6 +99,7 @@ class Juego_1 : Activity() {
                 runOnUiThread{
                     Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
                     pO = args[0].toString().toInt()
+                    reset()
                 }
                 //Toast.makeText( this,"Has Seleccionado", Toast.LENGTH_SHORT).show();
                 /*

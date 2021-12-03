@@ -43,6 +43,7 @@ class Juego_2 : Activity() {
     lateinit var botonReiniciar: Button
     lateinit var botonSalir: Button
     lateinit var e: String
+    lateinit var eO: String
     var per: TextView? = null
     var nom = arrayOf(
         "Gato",
@@ -83,16 +84,20 @@ class Juego_2 : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.juego_2)
         e = intent.getStringExtra("personaje").toString()
+        eO = intent.getStringExtra("personajeO").toString()
+        pO = eO.toInt()
         p = e.toInt()
         val str: String? = intent.getStringExtra("currentid")
         CurrentPlayerID = str.toString().toInt()
         SocketO = intent.getStringExtra("socket_o").toString()
         init()
 
+
+        println("El personaje del oponente es :"+pO)
         val mSocket = SocketHandler.getSocket()
         val data = JSONObject();
         data.put("socketIDO",SocketO);
-        println(SocketO)
+        /*
         data.put("personajeO",p);
         mSocket.emit("intercambiarPersonaje",data)
 
@@ -105,7 +110,7 @@ class Juego_2 : Activity() {
                 }
             }
         }
-
+    */
 
     }
 
