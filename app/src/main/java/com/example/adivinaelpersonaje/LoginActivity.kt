@@ -205,7 +205,7 @@ class LoginActivity : AppCompatActivity() {
     }
     fun jugar(){
         val i = Intent(this, Juego_1::class.java)
-        i.putExtra("currentid", CurrentPlayerID)
+        i.putExtra("currentid", CurrentPlayerID.toString())
         i.putExtra("socket_o", SocketO)
         startActivity(i)
         finish()

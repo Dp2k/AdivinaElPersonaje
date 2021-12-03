@@ -5,6 +5,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
@@ -80,13 +82,27 @@ class Juego_1 : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.juego)
-        CurrentPlayerID = intent.getStringExtra("currentid").toString().toInt()
+        val str: String? = intent.getStringExtra("currentid")
+        CurrentPlayerID = str.toString().toInt()
         SocketO = intent.getStringExtra("socket_o").toString()
         init()
         val mSocket = SocketHandler.getSocket()
         val data = JSONObject();
         data.put("id_jugador",CurrentPlayerID)
         mSocket.emit("logout",data)
+
+        mSocket.on("seleccionPersonaje"){
+            args ->
+            if (args[0] != null) {
+                runOnUiThread {
+                    val jArray = JSONArray(args.toString())
+                    val jo = jArray.getJSONObject(0)
+                    Toast.makeText( this,jo.getString("msg"), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
 
 
         val chat = findViewById<Button>(R.id.CHAT)
@@ -187,6 +203,10 @@ class Juego_1 : Activity() {
     }
 
     private fun reset() {
+        val mSocket  = SocketHandler.getSocket()
+        val data = JSONObject();
+        data.put("socketIDO",SocketO)
+        mSocket.emit("seleccionPersonaje",data)
         /*val i = Intent(this, Juego2::class.java)
         i.putExtra("personaje", p)
         startActivity(i)
