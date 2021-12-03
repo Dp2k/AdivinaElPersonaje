@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONObject
 
-class JugadorAdapter(private val dataSet: List<Jugador>, private val id: Int) :
+class JugadorAdapter(private val dataSet: List<Jugador>,private var id: Int) :
     RecyclerView.Adapter<JugadorAdapter.ViewHolder>() {
 
 
@@ -24,7 +24,7 @@ class JugadorAdapter(private val dataSet: List<Jugador>, private val id: Int) :
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val jugador = dataSet[position]
-        viewHolder.bind(jugador, id)
+        viewHolder.bind(jugador,id)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

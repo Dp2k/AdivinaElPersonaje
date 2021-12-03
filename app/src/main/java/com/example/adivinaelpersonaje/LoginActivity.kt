@@ -86,10 +86,12 @@ class LoginActivity : AppCompatActivity() {
                     builder.setTitle("Invitacion")
                     val jArray = JSONArray(args[1].toString())
                     val jo = jArray.getJSONObject(0)
-
                     builder.setMessage("Quieres jugar con el jugador :"+jo.getString("nombre"))
                     builder.setPositiveButton(android.R.string.ok) {
                             dialog, which ->
+                        val data = JSONObject();
+                        data.put("id_jugador",CurrentPlayerID);
+                            mSocket.emit("invAceptada",data)
                         Toast.makeText(this,
                             "jalas",
                             Toast.LENGTH_LONG).show()
@@ -100,6 +102,28 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText( this,args[1].toString(), Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+        mSocket.on("invAceptada"){
+                args ->
+                if(args[0] != null){
+                    runOnUiThread {
+                        val builder = AlertDialog.Builder(this)
+                        builder.setTitle("Confirmacion")
+                        val jArray = JSONArray(args[1].toString())
+                        val jo = jArray.getJSONObject(0)
+                        builder.setMessage("El jugador:"+jo.getString("nombre")+" acepto tu invitacion")
+                        builder.setPositiveButton(android.R.string.ok) {
+                                dialog, which ->
+                            Toast.makeText(this,
+                                "Inciando partida",
+                                Toast.LENGTH_LONG).show()
+                        }
+                        //builder.setNegativeButton("Cancelar", null)
+                        //builder.setNeutralButton("Recordar más tarde", null)
+                        builder.show()
+                        Toast.makeText( this,args[1].toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
         }
 
         mSocket.on("listaJugadores"){

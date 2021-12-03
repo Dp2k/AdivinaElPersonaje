@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         btnHistorial = findViewById(R.id.historiaPartidas)
 
         btnjugar.setOnClickListener{
-            val intent = Intent(this, Juego_1::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
