@@ -1,17 +1,15 @@
 package com.example.adivinaelpersonaje
+
 import android.app.Activity
-import android.content.Intent
+import android.widget.ImageButton
+import android.widget.TextView
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import org.json.JSONArray
-import org.json.JSONObject
+import android.widget.Button
+import android.widget.ImageView
 import java.util.*
 
-class Juego_1 : Activity() {
+class Juego_2 : Activity() {
     // variables para los componentes de la vista
     private  var CurrentPlayerID: Int = -1
     private var SocketO: String = ""
@@ -41,9 +39,10 @@ class Juego_1 : Activity() {
     var imb23: ImageButton? = null
     var imbp: ImageButton? = null
     var tablero = arrayOfNulls<ImageButton>(24)
+    lateinit var botonReiniciar: Button
+    lateinit var botonSalir: Button
+    lateinit var e: String
     var per: TextView? = null
-    var msj = arrayOfNulls<TextView>(10)
-    lateinit var env: EditText
     var nom = arrayOf(
         "Gato",
         "Perro",
@@ -70,78 +69,23 @@ class Juego_1 : Activity() {
         "Medusa",
         "Cangrejo"
     )
-    lateinit var Confirmar: Button
-    lateinit var botonSalir: Button
-    var p = "Nada"
 
     //imagenes
     lateinit var imagenes: IntArray
-    var fondo: Int = 0
+    var fondo = 0
+    var p = 0
 
     //variables del juego
     var arrayDesordenado: ArrayList<Int?>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.juego)
+        setContentView(R.layout.juego_2)
+        e = intent.getStringExtra("personaje").toString()
+        p = e.toInt()
         val str: String? = intent.getStringExtra("currentid")
         CurrentPlayerID = str.toString().toInt()
         SocketO = intent.getStringExtra("socket_o").toString()
         init()
-        val mSocket = SocketHandler.getSocket()
-        val data = JSONObject();
-        data.put("id_jugador",CurrentPlayerID)
-        mSocket.emit("logout",data)
-
-        mSocket.on("seleccionPersonaje"){
-            args ->
-            if (args[0] != null) {
-                runOnUiThread {
-                    //val jArray = JSONArray(args[0].toString())
-                    //val jo = jArray.getJSONObject(0)
-                    println(args[0].toString())
-                    Toast.makeText( this,args[0].toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-
-
-
-        /*val chat = findViewById<Button>(R.id.CHAT)
-        chat.setOnClickListener {
-            val bottom1 = BottomSheetDialog(
-                this@Juego_1
-            )
-            val bott = LayoutInflater.from(applicationContext)
-                .inflate(
-                    R.layout.emergente,
-                    findViewById<LinearLayout>(R.id.bottomcontainer)
-                )
-            msj[0] = bott.findViewById(R.id.msg1)
-            msj[1] = bott.findViewById(R.id.msg2)
-            msj[2] = bott.findViewById(R.id.msg3)
-            msj[3] = bott.findViewById(R.id.msg4)
-            msj[4] = bott.findViewById(R.id.msg5)
-            msj[5] = bott.findViewById(R.id.msg6)
-            msj[6] = bott.findViewById(R.id.msg7)
-            msj[7] = bott.findViewById(R.id.msg8)
-            msj[8] = bott.findViewById(R.id.msg9)
-            msj[9] = bott.findViewById(R.id.msg10)
-            bott.findViewById<View>(R.id.gchat).setOnClickListener {
-                Toast.makeText(this@Juego_1, "Cerrando chat", Toast.LENGTH_SHORT).show()
-                bottom1.dismiss()
-            }
-            bott.findViewById<View>(R.id.enviar).setOnClickListener {
-                env = bott.findViewById(R.id.enviado)
-                msj[8]?.setText(msj[6]?.text)
-                msj[6]?.setText(msj[4]?.text)
-                msj[4]?.setText(msj[2]?.text)
-                msj[2]?.setText(msj[0]?.text)
-                msj[0]?.setText(env.text)
-            }
-            bottom1.setContentView(bott)
-            bottom1.show()
-        }*/
     }
 
     private fun cargarTablero() {
@@ -198,29 +142,18 @@ class Juego_1 : Activity() {
     }
 
     private fun cargarBotones() {
-        Confirmar = findViewById(R.id.botonJuegoConfirmar)
+        botonReiniciar = findViewById(R.id.botonJuegoReiniciar)
         botonSalir = findViewById(R.id.botonJuegoSalir)
-        Confirmar.setOnClickListener { reset() }
-        botonSalir.setOnClickListener { finish() }
+        botonReiniciar.setOnClickListener(View.OnClickListener { reset() })
+        botonSalir.setOnClickListener(View.OnClickListener { finish() })
     }
 
     private fun reset() {
-        if(p != "Nada") {
-            val mSocket = SocketHandler.getSocket()
-            val data = JSONObject();
-            data.put("socketIDO", SocketO)
-            mSocket.emit("seleccionPersonaje", data)
-            val i = Intent(this, Juego_2::class.java)
-            i.putExtra("personaje", p.toString())
-            i.putExtra("currentid", CurrentPlayerID.toString())
-            i.putExtra("socket_o", SocketO)
-            finish()
-            startActivity(i)
-        }
-        else {
-            Toast.makeText(this,
-                "Selecciona personaje pls",
-                Toast.LENGTH_LONG).show()
+        for (i in tablero.indices) {
+            tablero[i]!!.scaleType = ImageView.ScaleType.CENTER_CROP
+            tablero[i]!!.setImageResource(imagenes[arrayDesordenado!![i]!!])
+            tablero[i]!!.isEnabled = true
+            //tablero[i].setImageResource(fondo);
         }
     }
 
@@ -268,24 +201,25 @@ class Juego_1 : Activity() {
         cargarTablero()
         cargarBotones()
         cargarImagenes()
+        println(e)
         arrayDesordenado = barajar(imagenes.size)
-        imbp!!.scaleType = ImageView.ScaleType.CENTER_CROP
-        imbp!!.setImageResource(fondo)
         imbp!!.isEnabled = false
         for (i in tablero.indices) {
             tablero[i]!!.scaleType = ImageView.ScaleType.CENTER_CROP
             tablero[i]!!.setImageResource(imagenes[arrayDesordenado!![i]!!])
             //tablero[i].setImageResource(fondo);
         }
+        imbp!!.scaleType = ImageView.ScaleType.CENTER_CROP
+        imbp!!.setImageResource(imagenes[p])
+        per!!.text = "Personaje " + nom[p]
         for (i in tablero.indices) {
             tablero[i]!!.isEnabled = true
             tablero[i]!!.setOnClickListener { /*if(!bloqueo)
                         comprobar(j, tablero[j]);*/
-                imbp!!.scaleType = ImageView.ScaleType.CENTER_CROP
-                imbp!!.setImageResource(imagenes[arrayDesordenado!![i]!!])
-                p = arrayDesordenado!![i].toString()
-                println(p)
-                per!!.text = "Personaje " + nom[arrayDesordenado!![i]!!]
+                val aux = tablero[i]
+                aux!!.scaleType = ImageView.ScaleType.CENTER_CROP
+                aux.setImageResource(fondo)
+                aux.isEnabled = false
             }
         }
     }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -19,26 +18,26 @@
 
             <ImageButton
                 android:id="@+id/boton00"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton01"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton02"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton03"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -51,26 +50,26 @@
 
             <ImageButton
                 android:id="@+id/boton04"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton05"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton06"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton07"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -84,26 +83,26 @@
 
             <ImageButton
                 android:id="@+id/boton08"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton09"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton10"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton11"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -117,26 +116,26 @@
 
             <ImageButton
                 android:id="@+id/boton12"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton13"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton14"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton15"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -150,26 +149,26 @@
 
             <ImageButton
                 android:id="@+id/boton16"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton17"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton18"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton19"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -182,26 +181,26 @@
 
             <ImageButton
                 android:id="@+id/boton20"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="0"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton21"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="1"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton22"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="2"></ImageButton>
 
             <ImageButton
                 android:id="@+id/boton23"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_column="3"></ImageButton>
 
         </TableRow>
@@ -214,12 +213,20 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/botonJuegoConfirmar"
+                android:id="@+id/botonJuegoReiniciar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:text="CONFIRMAR"></Button>
+                android:layout_marginLeft="10dp"
+                android:text="@string/boton_juego_reinit"></Button>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
+                android:text="Perdi" />
 
             <Button
                 android:id="@+id/botonJuegoSalir"
@@ -227,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="10dp"
-                android:text="Salirprro"></Button>
+                android:text="@string/boton_juego_quit"></Button>
 
         </LinearLayout>
 
