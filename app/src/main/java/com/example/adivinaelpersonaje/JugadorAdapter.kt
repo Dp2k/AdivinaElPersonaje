@@ -32,7 +32,7 @@ class JugadorAdapter(private val dataSet: List<Jugador>,private var id: Int) :
 
     class  ViewHolder(view : View): RecyclerView.ViewHolder(view){
 
-        private var txtJugador = view.findViewById<TextView>(R.id.nombreJugador)
+        private var txtJugador = view.findViewById<TextView>(R.id.nombreEmisor)
         private var btnmsg = view.findViewById<TextView>(R.id.btn_msg)
         private var layout = view.findViewById<LinearLayout>(R.id.item_jugador_layout)
         fun bind(jugador : Jugador,id2: Int) {

@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
 class Juego_2 : Activity() {
     // variables para los componentes de la vista
-    var msj = arrayOfNulls<TextView>(10)
+    //var ms = arrayOfNulls<TextView>(10)
     private  var CurrentPlayerID: Int = -1
     lateinit var env:EditText
     private var SocketO: String = ""
+    var Mensajes = listOf<Mensaje>(
+    )
     var imb00: ImageButton? = null
     var imb01: ImageButton? = null
     var imb02: ImageButton? = null
@@ -92,6 +97,20 @@ class Juego_2 : Activity() {
         CurrentPlayerID = str.toString().toInt()
         SocketO = intent.getStringExtra("socket_o").toString()
         init()
+        val mSocket = SocketHandler.getSocket()
+
+        var msge = MensajeAdapte(Mensajes)
+        mSocket.on("chat"){
+                args ->
+            if(args[0] != null){
+                runOnUiThread {
+                   Mensajes += listOf<Mensaje>(
+                       Mensaje(args[1].toString(),args[0].toString())
+                   )
+                    msge = MensajeAdapte(Mensajes)
+                }
+            }
+        }
 
 
         println("El personaje del oponente es :"+pO)
@@ -105,35 +124,25 @@ class Juego_2 : Activity() {
                 .inflate(
                     R.layout.emergente,
                     findViewById<LinearLayout>(R.id.bottomcontainer)
+
                 )
-            msj[0] = bott.findViewById(R.id.msg1)
-            msj[1] = bott.findViewById(R.id.msg2)
-            msj[2] = bott.findViewById(R.id.msg3)
-            msj[3] = bott.findViewById(R.id.msg4)
-            msj[4] = bott.findViewById(R.id.msg5)
-            msj[5] = bott.findViewById(R.id.msg6)
-            msj[6] = bott.findViewById(R.id.msg7)
-            msj[7] = bott.findViewById(R.id.msg8)
-            msj[8] = bott.findViewById(R.id.msg9)
-            msj[9] = bott.findViewById(R.id.msg10)
+            bott.findViewById<RecyclerView>(R.id.chatRecycler).adapter =  msge
+
             bott.findViewById<View>(R.id.gchat).setOnClickListener {
                 Toast.makeText(this@Juego_2, "Cerrando chat", Toast.LENGTH_SHORT).show()
                 bottom1.dismiss()
             }
             bott.findViewById<View>(R.id.enviar).setOnClickListener {
-                env = bott.findViewById(R.id.enviado)
-                msj[8]?.setText(msj[6]?.text)
-                msj[6]?.setText(msj[4]?.text)
-                msj[4]?.setText(msj[2]?.text)
-                msj[2]?.setText(msj[0]?.text)
-                msj[0]?.setText(env.text)
+                val data = JSONObject();
+                data.put("socketIDO",SocketO);
+                data.put("mensaje",env.text.toString());
+                data.put("idCurretPlayer",CurrentPlayerID);
+                mSocket.emit("chat",data)
             }
             bottom1.setContentView(bott)
             bottom1.show()
         }
-        val mSocket = SocketHandler.getSocket()
-        val data = JSONObject();
-        data.put("socketIDO",SocketO);
+
 
 
     }
